@@ -163,7 +163,14 @@ proxy-groups:
 
   # 业务分流组
   
+  - {name: YouTube, <<: *default}
+  - {name: Telegram, <<: *default}
+  - {name: Google, <<: *default}
   - {name: OneDrive, <<: *default}
+  - {name: GitHub, <<: *default}
+  - {name: SteamCN, <<: *default}
+  - {name: Steam, <<: *default}
+  - {name: Games, <<: *default}
   - {name: ChatGPT, <<: *default}
   - {name: Gemini, <<: *default}
   - {name: Copilot, <<: *default}
@@ -172,13 +179,10 @@ proxy-groups:
   - {name: Meta AI, <<: *default}
   - {name: Grok, <<: *default}
   - {name: Groq, <<: *default}
-  - {name: GitHub, <<: *default}
   - {name: Reddit, <<: *default}
-  - {name: Telegram, <<: *default}
   - {name: WhatsApp, <<: *default}
   - {name: Facebook, <<: *default}
   - {name: BiliBili, <<: *default}
-  - {name: YouTube, <<: *default}
   - {name: TikTok, <<: *default}
   - {name: Netflix, <<: *default}
   - {name: HBO, <<: *default}
@@ -188,12 +192,8 @@ proxy-groups:
   - {name: Popcorn, <<: *default}
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
-  - {name: SteamCN, <<: *default}
-  - {name: Steam, <<: *default}
-  - {name: Games, <<: *default}
   - {name: Crypto, <<: *default}
   - {name: Apple, <<: *default}
-  - {name: Google, <<: *default}
   - {name: Microsoft, <<: *default}
   - {name: Test, <<: *default}
   - {name: Block, <<: *default}
@@ -372,7 +372,17 @@ proxy-groups:
 # ========================
 rules:
 
+  - RULE-SET,Youtube / Domain,YouTube
+  - RULE-SET,Telegram / Domain,Telegram
+  - RULE-SET,Telegram / IP,Telegram
+  - RULE-SET,Telegram / IP,国外
+  - RULE-SET,Telegram / Domain,国外
+  - RULE-SET,Google / Domain,Google
+  - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,OneDrive / Domain,OneDrive
+  - RULE-SET,GitHub / Domain,GitHub
+  - RULE-SET,SteamCN / Domain,SteamCN
+  - RULE-SET,Steam / Domain,Steam
   - RULE-SET,TEST / Domain,Test
   - RULE-SET,Block / Domain,Block  
   - RULE-SET,ChatGPT / Domain,ChatGPT
@@ -384,9 +394,6 @@ rules:
   - RULE-SET,Groq / Domain,Groq
   - RULE-SET,Grok / Domain,Grok
   - RULE-SET,Reddit / Domain,Reddit 
-  - RULE-SET,GitHub / Domain,GitHub
-  - RULE-SET,Telegram / Domain,Telegram
-  - RULE-SET,Telegram / IP,Telegram
   - RULE-SET,WhatsApp / Domain,WhatsApp
   - RULE-SET,Facebook / Domain,Facebook
   - RULE-SET,Apple / Domain,Apple
@@ -397,7 +404,6 @@ rules:
   - RULE-SET,Bybit / Domain,Crypto
   - RULE-SET,Binance / Domain,Crypto
   - RULE-SET,BiliBili / Domain,BiliBili
-  - RULE-SET,Youtube / Domain,YouTube
   - RULE-SET,TikTok / Domain,TikTok
   - RULE-SET,Netflix / Domain,Netflix
   - RULE-SET,Netflix / IP,Netflix,no-resolve
@@ -407,19 +413,13 @@ rules:
   - RULE-SET,Popcorn / Domain,Popcorn 
   - RULE-SET,HBO / Domain,HBO
   - RULE-SET,Spotify / Domain,Spotify
-  - RULE-SET,SteamCN / Domain,SteamCN
-  - RULE-SET,Steam / Domain,Steam
   - RULE-SET,Epic / Domain,Games
   - RULE-SET,EA / Domain,Games
   - RULE-SET,Blizzard / Domain,Games
   - RULE-SET,UBI / Domain,Games
   - RULE-SET,PlayStation / Domain,Games
   - RULE-SET,Nintend / Domain,Games
-  - RULE-SET,Google / Domain,Google
-  - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,Nvidia / Domain,Nvidia 
-  - RULE-SET,Telegram / IP,国外
-  - RULE-SET,Telegram / Domain,国外
   - RULE-SET,Proxy / Domain,国外
   - RULE-SET,Globe / Domain,国外  
   - RULE-SET,Direct / Domain,国内
@@ -437,6 +437,7 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 
 rule-providers:
+  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
   OneDrive / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
   TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
   ChatGPT / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs"}
@@ -465,7 +466,6 @@ rule-providers:
   Disney / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs"}
   HBO / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs"}
   Spotify / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs"}
-  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
   Steam / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs"}
   Epic / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Epic/Epic.list"}
   EA / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/EA/EA.list"}
