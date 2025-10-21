@@ -52,12 +52,14 @@
 
 - 易有云文件管理器，打开 `/root/etc/openclash`
 - 删除以下文件，以防分流策略不更新或更新不及时
-  - XX.yaml：`/root/etc/openclash`，`/root/etc/openclash/backup`
-  - XX.db：`/root/etc/openclash/history`
-  - 删除完成后，再次应用该yaml配置文件
+	- XX.yaml：`/root/etc/openclash`，`/root/etc/openclash/backup`
+	- XX.db：`/root/etc/openclash/history`
+		- 若只是微调yaml（如调整分流组顺序），可保留history下的 XX.db 数据文件（设置数据）
+	- 删除完成后，再次应用该yaml配置文件
 - 覆写设置，优先于手动上传yaml配置
-  - 若是覆写规则不生效，试着清理DNS缓存
-  - 若清理DNS依然无效，执行上述删除操作
+	- 若是覆写规则不生效，试着清理DNS缓存
+	- 若清理DNS依然无效，执行上述删除操作
+
 
 
 
