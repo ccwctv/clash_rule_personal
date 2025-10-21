@@ -48,6 +48,17 @@
 
 
 
+# OpenClash 更新 Yaml配置
+
+- 易有云文件管理器，打开 `/root/etc/openclash`
+- 删除以下文件，以防分流策略不更新或更新不及时
+  - XX.yaml：`/root/etc/openclash`，`/root/etc/openclash/backup`
+  - XX.db：`/root/etc/openclash/history`
+- 覆写设置，优先于手动上传yaml配置
+  - 若是覆写规则不生效，试着清理DNS缓存
+  - 若清理DNS依然无效，执行上述删除操作
+
+
 
 
 
