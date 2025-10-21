@@ -1,3 +1,10 @@
+# Github
+
+- 个人Github：[clash_rule_personal](https://github.com/ccwctv/clash_rule_personal)  
+- 故障转移：[clash-fallback-all.yaml](https://github.com/liandu2024/little/blob/main/yaml/clash-fallback-all.yaml)  
+- 分流规则
+  - [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)  
+
 
 
 # 策略组位置对应
@@ -36,6 +43,7 @@
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/2.png?raw=true)
 
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/3.png?raw=true)  
+
 
 
 
