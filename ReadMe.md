@@ -9,8 +9,8 @@
 
 # 策略组位置对应
 
-- 一一对应
-- 顺序也要对应
+- 无需一一对应
+- 把修改、自定义的策略组前置，好后期修改
 
 
 
@@ -44,6 +44,7 @@
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/2.png?raw=true)
 
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/3.png?raw=true)  
+
 
 
 
