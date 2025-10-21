@@ -32,6 +32,7 @@
 
 - 注意规则集类型
   - text 文件：classical
+  - yaml 文件：classical
   - mrs 文件：domain
 - Github 上文件，点击右上角 Raw 打开，才是文件地址
 - Github 地址前，添加加速地址，以防拉取配置失败
@@ -43,6 +44,7 @@
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/2.png?raw=true)
 
 ![](https://github.com/ccwctv/clash_rule_personal/blob/1214319c26e8253c87d8b1453bf4aee88713d8f2/Picture/3.png?raw=true)  
+
 
 
 
