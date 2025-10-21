@@ -3,7 +3,8 @@
 - 个人Github：[clash_rule_personal](https://github.com/ccwctv/clash_rule_personal)  
 - 故障转移：[clash-fallback-all.yaml](https://github.com/liandu2024/little/blob/main/yaml/clash-fallback-all.yaml)  
 - 分流规则
-  - [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)  
+  - [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
+  - [little](https://github.com/liandu2024/little)
 
 
 
@@ -59,6 +60,7 @@
 - 覆写设置，优先于手动上传yaml配置
 	- 若是覆写规则不生效，试着清理DNS缓存
 	- 若清理DNS依然无效，执行上述删除操作
+
 
 
 
