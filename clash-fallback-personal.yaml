@@ -58,6 +58,7 @@ proxy-providers:
 
 
 
+
 proxies:
   - {name: 直连, type: direct}
   - {name: 拒绝, type: reject}
@@ -91,6 +92,8 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
+    - 202.103.224.68
+    - 202.103.225.68
     - 223.5.5.5
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
@@ -150,13 +153,11 @@ default: &default
     - 所有-手动
     - 所有-自动
     - 香港-故转
-    - 台湾-故转
-    - 日本-故转
     - 新加坡-故转
-    - 韩国-故转
+    - 日本-故转
+    - 台湾-故转
     - 美国-故转
     - 澳大利亚-故转
-    - 英国-故转
     - 其他-故转
     - 拒绝
 
@@ -173,18 +174,7 @@ proxy-groups:
   - {name: AI, <<: *default}
   - {name: Stream Media, <<: *default}  # 流媒体
   - {name: Game, <<: *default}         # 游戏平台，包括Steam
-
-  - name: 所有-手动
-    type: select
-    include-all: true
-    filter: "^((?!(直连|拒绝)).)*$"
-
-  - name: 所有-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "^((?!(直连|拒绝)).)*$"
+  - {name: Test, <<: *default}         # 测速、测试IP
 
   # 香港组
   - name: 香港-故转
@@ -207,24 +197,24 @@ proxy-groups:
     interval: 300
     filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
  
-  # 台湾组
-  - name: 台湾-故转
+  # 新加坡组
+  - name: 新加坡-故转
     type: fallback
     interval: 300
     lazy: false
     proxies:
-      - 台湾-手动
-      - 台湾-自动
-  - name: 台湾-手动
+      - 新加坡-手动
+      - 新加坡-自动
+  - name: 新加坡-手动
     type: select
     include-all: true
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
-  - name: 台湾-自动
+    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
+  - name: 新加坡-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
+    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
 
   # 日本组
   - name: 日本-故转
@@ -245,24 +235,24 @@ proxy-groups:
     interval: 300
     filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
 
-  # 新加坡组
-  - name: 新加坡-故转
+  # 台湾组
+  - name: 台湾-故转
     type: fallback
     interval: 300
     lazy: false
     proxies:
-      - 新加坡-手动
-      - 新加坡-自动
-  - name: 新加坡-手动
+      - 台湾-手动
+      - 台湾-自动
+  - name: 台湾-手动
     type: select
     include-all: true
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-  - name: 新加坡-自动
+    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
+  - name: 台湾-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
+    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
 
   # 美国组
   - name: 美国-故转
@@ -302,43 +292,17 @@ proxy-groups:
     interval: 300
     filter: "(?=.*(澳大利亚|Australia|澳洲|AU|AUS)).*$"
 
-  # 韩国组
-  - name: 韩国-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 韩国-手动
-      - 韩国-自动
-  - name: 韩国-手动
+  - name: 所有-手动
     type: select
     include-all: true
-    filter: "(?=.*(广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
-  - name: 韩国-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea)).*$"
+    filter: "^((?!(直连|拒绝)).)*$"
 
-  # 英国组
-  - name: 英国-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 英国-手动
-      - 英国-自动
-  - name: 英国-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
-  - name: 英国-自动
+  - name: 所有-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
+    filter: "^((?!(直连|拒绝)).)*$"
 
   # 其他组
   - name: 其他-故转
@@ -351,20 +315,19 @@ proxy-groups:
   - name: 其他-手动
     type: select
     include-all: true
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|英国|UK|United Kingdom|伦敦|英|London|🇬🇧)).)*$"
+    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).)*$"
   - name: 其他-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|英国|UK|United Kingdom|伦敦|英|London|🇬🇧)).)*$"
+    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).)*$"
   
   - {name: SteamCN, <<: *default}
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
   - {name: Microsoft, <<: *default}
-  - {name: Test, <<: *default}         # 测试IP
   - {name: Block, <<: *default}
   - {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
@@ -372,14 +335,14 @@ proxy-groups:
 
 # ========================
 # 规则引擎（rules）
+# 空格缩进，尽量不要制表符缩进
 # ========================
 rules:
 
+#  - DOMAIN-SUFFIX,trashbytes.net,国内
   - RULE-SET,Youtube / Domain,YouTube
   - RULE-SET,Telegram / Domain,Telegram
   - RULE-SET,Telegram / IP,Telegram
-  - RULE-SET,Telegram / IP,国外
-  - RULE-SET,Telegram / Domain,国外
   - RULE-SET,Google / Domain,Google
   - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,OneDrive / Domain,Google
@@ -426,6 +389,7 @@ rules:
   - RULE-SET,China / Domain,国内
   - RULE-SET,China / IP,国内,no-resolve
   - RULE-SET,Private / Domain,国内
+  - RULE-SET,OthersCN / Domain,国内
   - MATCH,其他
 
 # ========================
@@ -437,8 +401,8 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 
 rule-providers:
-  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
-  OneDrive / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
+  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
+  OneDrive / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
   Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}  
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
@@ -486,8 +450,12 @@ rule-providers:
   Private / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
   China / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
   China / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+  OthersCN / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OthersCN/OthersCN.list"}
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
+
+
 
