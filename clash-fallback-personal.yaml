@@ -141,7 +141,7 @@ tun:
 profile:
   store-selected: true
   store-fake-ip: true
- 
+
 
 # ========================
 # 策略组定义
@@ -150,14 +150,15 @@ default: &default
   type: select
   proxies:
     - 直连
-    - 所有-手动
-    - 所有-自动
+    - 低倍率-故转
     - 香港-故转
     - 新加坡-故转
     - 日本-故转
     - 台湾-故转
     - 美国-故转
     - 澳大利亚-故转
+    - 所有-手动
+    - 所有-自动
     - 其他-故转
     - 拒绝
 
@@ -175,6 +176,28 @@ proxy-groups:
   - {name: Stream Media, <<: *default}  # 流媒体
   - {name: Game, <<: *default}         # 游戏平台，包括Steam
   - {name: Test, <<: *default}         # 测速、测试IP
+
+  # 低倍率组
+  - name: 低倍率-故转
+    type: fallback
+    interval: 300
+    lazy: false
+    proxies:
+      - 低倍率-手动
+      - 低倍率-自动
+  
+  - name: 低倍率-手动
+    type: select
+    include-all: true
+    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果))).*$"
+
+  - name: 低倍率-自动
+    type: url-test
+    include-all: true
+    tolerance: 50
+    interval: 300
+    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果))).*$"
+  
 
   # 香港组
   - name: 香港-故转
@@ -458,6 +481,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
