@@ -1,0 +1,35 @@
+# NAME: Jav
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+#DOMAIN-SUFFIX,1drv.com
+
+# ADs but supjav need
+DOMAIN-SUFFIX,whos.amung.us
+DOMAIN-SUFFIX,jwpcdn.com
+
+# Jav
+DOMAIN-KEYWORD,missav
+DOMAIN-KEYWORD,jable
+DOMAIN-KEYWORD,jav
+
+DOMAIN-KEYWORD,fc2
+
+# Porn site
+DOMAIN-KEYWORD,pornhub
+DOMAIN-KEYWORD,spankbang
+DOMAIN-KEYWORD,xvideo
+
+
+# 资源
+DOMAIN-KEYWORD,coomer
+DOMAIN-KEYWORD,noodlemagazine
+
+
+# Anime
+DOMAIN-KEYWORD,hentai
+
+# shemale
+DOMAIN-KEYWORD,shemale
+DOMAIN-KEYWORD,ts
+DOMAIN-KEYWORD,trans
+DOMAIN-KEYWORD,tranny
+DOMAIN-KEYWORD,trannies
