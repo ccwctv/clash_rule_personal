@@ -7,7 +7,7 @@
 proxy-providers:
 
   Yukihasu:
-    url: "XXX"
+    url: "机场订阅地址"  
     type: http
     interval: 86400
     health-check:
@@ -17,7 +17,7 @@ proxy-providers:
     proxy: 直连 
 
   sslinks:
-    url: "XXX"
+    url: "机场订阅地址"  
     type: http
     interval: 86400
     health-check:
@@ -27,7 +27,7 @@ proxy-providers:
     proxy: 直连 
     
   teacat:
-    url: "XXX"
+    url: "机场订阅地址"  
     type: http
     interval: 86400
     health-check:
@@ -37,7 +37,7 @@ proxy-providers:
     proxy: 直连    
 
   牛逼:
-    url: "XXX"
+    url: "机场订阅地址"  
     type: http
     interval: 86400
     health-check:
@@ -47,7 +47,7 @@ proxy-providers:
     proxy: 直连
 
   大航海:
-    url: "XXX"
+    url: "机场订阅地址"  
     type: http
     interval: 86400
     health-check:
@@ -483,4 +483,5 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
