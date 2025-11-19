@@ -170,10 +170,7 @@ proxy-groups:
   - {name: 国外, <<: *default}
   - {name: 其他, <<: *default}
   - {name: Google, <<: *default}         # 谷歌、OneDrive、Github等高速、低流量需求的网站论坛
-  - {name: SNS, <<: *default}          # Twitter、Facebook、TikTok、Reddit等社交网络，有一定流量需求
-  - {name: AI, <<: *default}
-  - {name: Stream Media, <<: *default}  # 流媒体
-  - {name: Game, <<: *default}         # 游戏平台，包括Steam
+  - {name: Microsoft, <<: *default}
   - {name: Test, <<: *default}         # 测速、测试IP
 
   # 低倍率组
@@ -344,12 +341,15 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "^((?!(.*(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States))).)*$"
-  
+
+  - {name: SNS, <<: *default}          # Twitter、Facebook、TikTok、Reddit等社交网络，有一定流量需求
+  - {name: AI, <<: *default}
+  - {name: Stream Media, <<: *default}  # 流媒体
+  - {name: Game, <<: *default}         # 游戏平台，包括Steam  
   - {name: SteamCN, <<: *default}
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
-  - {name: Microsoft, <<: *default}
   - {name: Block, <<: *default}
   - {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
@@ -483,5 +483,6 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
