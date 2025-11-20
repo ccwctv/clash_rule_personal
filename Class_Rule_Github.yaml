@@ -435,7 +435,7 @@ rule-providers:
   Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}  
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
-  PlayStore / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Google/Google%20Play%20Store.list"}
+  PlayStore / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Google/PlayStore.list"}
   Proxy_jichang / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_jichang.list"}
   NSFW / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/NSFW/NSFW.list"}
   TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
@@ -487,5 +487,6 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
