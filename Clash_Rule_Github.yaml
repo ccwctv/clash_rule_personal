@@ -13,11 +13,10 @@ p: &p
     # 节点连通性检测时间，单位为秒
     interval: 300
     # 节点超时延迟，单位为毫秒
-    timeout: 1000
+    #timeout: 1000
     # 节点自动切换差值，单位为毫秒
     tolerance: 150
   #proxy: 直连 
-
 
 # 机场节点订阅
 proxy-providers:
@@ -97,6 +96,7 @@ dns:
     - 202.103.224.68
     - 202.103.225.68
     - 223.5.5.5
+    - 223.6.6.6
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
@@ -487,6 +487,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
