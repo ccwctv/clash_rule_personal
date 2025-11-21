@@ -5,7 +5,7 @@
 p: &p
   type: http
   # 自动更新订阅时间，单位为秒
-  interval: 86400
+  interval: 21600
   health-check:
     enable: true
     #url: https://cp.cloudflare.com
@@ -487,5 +487,6 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
