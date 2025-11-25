@@ -431,21 +431,27 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 
 rule-providers:
+
+# Personal Rules
+  PlayStore / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Google/PlayStore.list"}
+  Proxy_jichang / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_jichang.list"}
+  NSFW / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/NSFW/NSFW.list"}
   EmbyServer / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/StreamMedia/EmbyServer.list"}
-  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
-  OneDrive / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
+  SteamCN / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
+  OneDrive_Personal / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OneDrive/OneDrive_Personal.list"}
+  AI_Personal / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/AI/AI_Personal.list"}
+  OthersCN / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OthersCN/OthersCN.list"}
+
+# Subscription Rules
+  OneDrive / Domain: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
   Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}  
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
-  PlayStore / Domain: {<<: *class, url: "raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Google/PlayStore.list"}
-  Proxy_jichang / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_jichang.list"}
-  NSFW / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/NSFW/NSFW.list"}
   TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
   ChatGPT / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs"}
   Claude / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list"}
   Meta AI / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/MetaAi.list"}
   Perplexity / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
-  AI_Personal / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/AI/AI_Personal.list"}
   Copilot / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Copilot.list"}
   Gemini / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Gemini.list"}
   GitHub / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
@@ -485,10 +491,10 @@ rule-providers:
   Private / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
   China / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
   China / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
-  OthersCN / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OthersCN/OthersCN.list"}
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
