@@ -370,9 +370,9 @@ rules:
   - RULE-SET,Telegram / IP,Telegram
   - RULE-SET,NSFW / Domain,Telegram
   - RULE-SET,EmbyServer / Domain,Telegram
+  - RULE-SET,PlayStore / Domain,国内
   - RULE-SET,Google / Domain,Google
   - RULE-SET,Google / IP,Google,no-resolve
-  - RULE-SET,PlayStore / Domain,Google
   - RULE-SET,OneDrive / Domain,Google
   - RULE-SET,GitHub / Domain,Google
   - RULE-SET,Proxy_jichang / Domain,Google
@@ -489,6 +489,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
