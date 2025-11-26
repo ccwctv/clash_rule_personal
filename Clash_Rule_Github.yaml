@@ -93,10 +93,10 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
-    - 202.103.224.68
-    - 202.103.225.68
     - 223.5.5.5
     - 223.6.6.6
+    - 119.29.29.29
+    - 119.28.28.28
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
@@ -507,6 +507,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
