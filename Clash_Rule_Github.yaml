@@ -18,6 +18,7 @@ p: &p
     tolerance: 150
   #proxy: 直连 
 
+
 # 机场节点订阅
 proxy-providers:
 
@@ -34,26 +35,32 @@ proxy-providers:
       additional-prefix: "TC | "
     url: "http33cb2a383c3a70062c7513f2f321"
 
-  02 eggtart:
+  02 ShenLong:
+    <<: *p
+    override:
+      additional-prefix: "SL | "
+    url: "httaf33de41d17bb36b1450"
+    
+  03 eggtart:
     <<: *p
     override:
       additional-prefix: "EG | "
     url: "http40f91b2bfe3a1485c502c"
     proxy: 低倍率-故转 
-    
-  03 ssLinks:
+
+  04 ssLinks:
     <<: *p
     override:
-      additional-prefix: "SL | "
-    url: "htt9d9915b4?token=f2305ef63a3aaf42d97a6728afa1fe68"
-    
-  04 newbee:
+      additional-prefix: "SS | "
+    url: "httef63a3aaf42d97a6728afa1fe68"
+
+  05 newbee:
     <<: *p
     override:
       additional-prefix: "NB | "
     url: "http76038759230097ff5bd0cca5"
 
-  05 dhh:
+  06 dhh:
     <<: *p
     override:
       additional-prefix: "DH | "
@@ -170,12 +177,13 @@ proxy-groups:
   
   - {name: YouTube, <<: *default}        # 观看BWF比赛
   - {name: Telegram, <<: *default}       # 低倍率
-  - {name: 国外, <<: *default}
-  - {name: 其他, <<: *default}
   - {name: Google, <<: *default}         # 谷歌、OneDrive、Github等高速、低流量需求的网站论坛
+  - {name: EmbyServer, <<: *default}         
   - {name: Microsoft, <<: *default}
   - {name: Test, <<: *default}         # 测速、测试IP
-
+  - {name: 国外, <<: *default}
+  - {name: 其他, <<: *default}
+  
   # 低倍率组
   - name: 低倍率-故转
     type: fallback
@@ -188,14 +196,14 @@ proxy-groups:
   - name: 低倍率-手动
     type: select
     include-all: true
-    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果))).*$"
+    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新))).*$"
 
   - name: 低倍率-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果))).*$"
+    filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新))).*$"
   
 
   # 香港组
@@ -317,14 +325,14 @@ proxy-groups:
   - name: 所有-手动
     type: select
     include-all: true
-    filter: "^((?!(直连|拒绝)).)*$"
+    filter: "^((?!(包含|直连|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐)).)*$"
     
   - name: 所有-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "^((?!(直连|拒绝)).)*$"
+    filter: "^((?!(包含|直连|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐)).)*$"
 
   # 其他组
   - name: 其他-故转
@@ -337,26 +345,24 @@ proxy-groups:
   - name: 其他-手动
     type: select
     include-all: true
-    filter: "^((?!(.*(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|剩余|官网|网站|客户端|如果))).)*$"
+    filter: "^((?!(.*(包含|直连|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States))).)*$"
   - name: 其他-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "^((?!(.*(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|剩余|官网|网站|客户端|如果))).)*$"
+    filter: "^((?!(.*(包含|直连|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States))).)*$"
 
   - {name: SNS, <<: *default}          # Twitter、Facebook、TikTok、Reddit等社交网络，有一定流量需求
   - {name: AI, <<: *default}
   - {name: StreamMedia, <<: *default}  # 流媒体
   - {name: Game, <<: *default}         # 游戏平台，包括Steam  
-  - {name: SteamCN, <<: *default}
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
   - {name: Block, <<: *default}
   - {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
-# - {name: TikTok, <<: *default}      # 现归到SNS策略组
 
 # ========================
 # 规则引擎（rules）
@@ -365,18 +371,21 @@ proxy-groups:
 rules:
 
   #- DOMAIN-SUFFIX,trashbytes.net,国内
+  - RULE-SET,OthersCN / Domain,国内
+  - RULE-SET,PlayStore / Domain,国内
+  - RULE-SET,SteamCN / Domain,国内
+  - RULE-SET,GameDownloadCN / Domain,国内
+  - RULE-SET,EmbyServer / Domain,EmbyServer
   - RULE-SET,Youtube / Domain,YouTube
   - RULE-SET,Telegram / Domain,Telegram
   - RULE-SET,Telegram / IP,Telegram
   - RULE-SET,NSFW / Domain,Telegram
-  - RULE-SET,EmbyServer / Domain,Telegram
-  - RULE-SET,PlayStore / Domain,国内
   - RULE-SET,Google / Domain,Google
   - RULE-SET,Google / IP,Google,no-resolve
   - RULE-SET,OneDrive / Domain,Google
+  - RULE-SET,OneDrive_Personal / Domain,Google
   - RULE-SET,GitHub / Domain,Google
   - RULE-SET,Proxy_jichang / Domain,Google
-  - RULE-SET,SteamCN / Domain,SteamCN
   - RULE-SET,Steam / Domain,Game
   - RULE-SET,Epic / Domain,Game
   - RULE-SET,EA / Domain,Game
@@ -419,7 +428,6 @@ rules:
   - RULE-SET,China / Domain,国内
   - RULE-SET,China / IP,国内,no-resolve
   - RULE-SET,Private / Domain,国内
-  - RULE-SET,OthersCN / Domain,国内
   - MATCH,其他
 
 # ========================
@@ -429,6 +437,7 @@ rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
+
 
 rule-providers:
 
@@ -507,11 +516,4 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
-
-
-
-
-
-
-
 
