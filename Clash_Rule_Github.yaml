@@ -118,7 +118,7 @@ dns:
   # DDNS
     #- +.daengngoenz.cn
   # 机场    
-    - +.Yukihasu
+    - +.azumase.ren
     - +.ss.mba    
     - +.teacat.cloud
     - +.idsduf.com  
@@ -510,6 +510,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
