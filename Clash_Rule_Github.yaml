@@ -8,7 +8,7 @@ p: &p
   interval: 21600
   health-check:
     enable: true
-    #url: https://cp.cloudflare.com
+    # url: https://cp.cloudflare.com
     url: https://www.gstatic.com/generate_204
     # 节点连通性检测时间，单位为秒
     interval: 300
@@ -16,7 +16,7 @@ p: &p
     #timeout: 1000
     # 节点自动切换差值，单位为毫秒
     tolerance: 150
-  #proxy: 直连 
+  # proxy: 直连 
 
 
 # 机场节点订阅
@@ -97,40 +97,34 @@ dns:
   enable: true
   listen: 0.0.0.0:7874
   ipv6: true
+  default-nameserver:
+    - 114.114.114.114
+    - tls://223.5.5.5:853
+    - 119.29.29.29
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
-    - 223.5.5.5
-    - 223.6.6.6
-    - 119.29.29.29
-    - 119.28.28.28
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
     - +.local
     - geosite:cn
-# Yukihasu    
+  # PlayStore
+    # - +.googleapis.cn
+    # - +.xn--ngstr-lra8j.com
+  # Microsoft
+  # DDNS
+    # - +.daengngoenz.cn
+  # 机场    
     - +.Yukihasu
-# sslinks 
     - +.ss.mba    
-# teacat 
     - +.teacat.cloud
-# 牛逼   
     - +.idsduf.com  
     - +.66jc.top
-# dhh        
     - +.dhh.moe
-
-# 其他     
-    - +.ynhtbank.com
-    - +.qeayr.cn
-    - +.saojc.xyz   
-    - +.sssyun.xyz
-    - +.dler.cloud
-    - +.0tk8a3a1q4t94dler.com    
-    - +.aerianas.top
-    - +.gptacg.top
-    - +.wxda.net
+  # 其他     
 
 ipv6: true
 
@@ -370,7 +364,7 @@ proxy-groups:
 # ========================
 rules:
 
-  #- DOMAIN-SUFFIX,trashbytes.net,国内
+  # - DOMAIN-SUFFIX,trashbytes.net,国内
   - RULE-SET,OthersCN / Domain,国内
   - RULE-SET,PlayStore / Domain,国内
   - RULE-SET,SteamCN / Domain,国内
@@ -516,4 +510,5 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
