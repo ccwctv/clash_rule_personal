@@ -112,11 +112,11 @@ dns:
     - +.local
     - geosite:cn
   # PlayStore
-    # - +.googleapis.cn
-    # - +.xn--ngstr-lra8j.com
+    #- +.googleapis.cn
+    #- +.xn--ngstr-lra8j.com
   # Microsoft
   # DDNS
-    # - +.daengngoenz.cn
+    #- +.daengngoenz.cn
   # 机场    
     - +.Yukihasu
     - +.ss.mba    
@@ -510,5 +510,6 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
