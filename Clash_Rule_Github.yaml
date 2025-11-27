@@ -98,9 +98,9 @@ dns:
   listen: 0.0.0.0:7874
   ipv6: true
   default-nameserver:
-    - 114.114.114.114
     - tls://223.5.5.5:853
     - 119.29.29.29
+    - 114.114.114.114
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
@@ -510,6 +510,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
