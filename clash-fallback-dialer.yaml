@@ -3,7 +3,7 @@
 # ========================
 
 # 机场节点订阅
-# 订阅后面 &flag=ClashProvider 就是纯节点模式（未验证）
+# 订阅后面 &flag=clash-provider 就是纯节点模式（未验证）
 proxy-providers:
 
   PolYun:
