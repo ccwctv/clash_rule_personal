@@ -20,7 +20,7 @@ p: &p
 
 
 # 机场节点订阅
-# 订阅后面 &flag=ClashProvider 就是纯节点模式（未验证）
+# 订阅后面 &flag=clash-provider 就是纯节点模式（未验证）
 proxy-providers:
 
   00 Yukihasu:
@@ -512,6 +512,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+
 
 
 
