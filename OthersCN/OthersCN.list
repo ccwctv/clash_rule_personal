@@ -15,4 +15,4 @@ DOMAIN,software-static.download.prss.microsoft.com
 
 # Video playback
 DOMAIN-KEYWORD,fs-play
-DOMAIN,fs-play.inooy.com  # 飞速
+#DOMAIN,fs-play.inooy.com  # 飞速
