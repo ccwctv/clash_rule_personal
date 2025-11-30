@@ -8,10 +8,11 @@
 # Rule: https://wiki.metacubex.one/en/config/rules/
 
 
-DOMAIN-SUFFIX,trashbytes.net
+DOMAIN-SUFFIX,trashbytes.net  
 DOMAIN,software-static.download.prss.microsoft.com
 #DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 
 
 # Video playback
 DOMAIN-KEYWORD,fs-play   # 飞速
+DOMAIN,fs-play.inooy.com
