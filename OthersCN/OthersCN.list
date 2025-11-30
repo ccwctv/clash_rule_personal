@@ -5,8 +5,13 @@
 # DOMAIN: 12
 # DOMAIN-SUFFIX: 5
 # TOTAL: 17
-# 规则：https://wiki.metacubex.one/en/config/rules/
+# Rule: https://wiki.metacubex.one/en/config/rules/
+
 
 DOMAIN-SUFFIX,trashbytes.net
 DOMAIN,software-static.download.prss.microsoft.com
 #DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+
+
+# Video playback
+DOMAIN-KEYWORD,fs-play   # 飞速
