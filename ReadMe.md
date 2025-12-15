@@ -6,7 +6,8 @@
   - [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
   - [little](https://github.com/liandu2024/little)
   - [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master)
-
+  - [MetaCubeX/meta-rules-dat](https://github.com/MetaCubeX/meta-rules-dat)
+  - [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)
 
 # 策略组位置对应
 
@@ -66,6 +67,7 @@
 覆写设置，优先于手动上传yaml配置
 - 若是覆写规则不生效，试着清理DNS缓存
 - 若清理DNS依然无效，执行上述删除操作
+
 
 
 
