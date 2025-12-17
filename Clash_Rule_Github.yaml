@@ -47,7 +47,7 @@ proxy-providers:
     override:
       additional-prefix: "EG | "
     url: "http40f91b2bfe3a1485c502c"
-    proxy: 低倍率-故转 
+    #proxy: 低倍率-故转 
 
   04 ssLinks:
     <<: *p
@@ -389,8 +389,7 @@ rules:
   - RULE-SET,UBI / Domain,Game
   - RULE-SET,PlayStation / Domain,Game
   - RULE-SET,Nintend / Domain,Game
-  - RULE-SET,TEST / Domain,Test
-  - RULE-SET,Block / Domain,Block  
+  - RULE-SET,TEST / Domain,Test 
   - RULE-SET,ChatGPT / Domain,AI
   - RULE-SET,Claude / Domain,AI
   - RULE-SET,Copilot / Domain,AI
@@ -493,7 +492,12 @@ rules:
   - RULE-SET,China / Domain,国内
   - RULE-SET,China / IP,国内,no-resolve
   - RULE-SET,Private / Domain,国内
+  - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - RULE-SET,Block / Domain,Block
+  - RULE-SET,Reject / Domain,Block
+  - RULE-SET,BanAD / Domain,Block
   - MATCH,其他
 
 # ========================
@@ -584,6 +588,7 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.yaml"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.yaml"}
+
 
 
 
