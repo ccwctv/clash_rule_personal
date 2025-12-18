@@ -356,75 +356,9 @@ proxy-groups:
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
-  - {name: Block, <<: *default}
-  - {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
-
-# ========================
-# 规则引擎（rules）
-# 空格缩进，尽量不要制表符缩进
-# ========================
-rules:
-
-  # - DOMAIN-SUFFIX,trashbytes.net,国内
-  - RULE-SET,OthersCN / Domain,国内
-  - RULE-SET,PlayStore / Domain,国内
-  - RULE-SET,SteamCN / Domain,国内
-  - RULE-SET,GameDownloadCN / Domain,国内
-  - RULE-SET,EmbyServer / Domain,EmbyServer
-  - RULE-SET,Youtube / Domain,YouTube
-  - RULE-SET,Telegram / Domain,Telegram
-  - RULE-SET,Telegram / IP,Telegram,no-resolve
-  - RULE-SET,NSFW / Domain,Telegram
-  - RULE-SET,Google / Domain,Google
-  - RULE-SET,Google / IP,Google,no-resolve
-  - RULE-SET,OneDrive / Domain,Google
-  - RULE-SET,OneDrive_Personal / Domain,Google
-  - RULE-SET,GitHub / Domain,Google
-  - RULE-SET,Proxy_jichang / Domain,Google
-  - RULE-SET,Steam / Domain,Game
-  - RULE-SET,Epic / Domain,Game
-  - RULE-SET,EA / Domain,Game
-  - RULE-SET,Blizzard / Domain,Game
-  - RULE-SET,UBI / Domain,Game
-  - RULE-SET,PlayStation / Domain,Game
-  - RULE-SET,Nintend / Domain,Game
-  - RULE-SET,TEST / Domain,Test 
-  - RULE-SET,ChatGPT / Domain,AI
-  - RULE-SET,Claude / Domain,AI
-  - RULE-SET,Copilot / Domain,AI
-  - RULE-SET,Gemini / Domain,AI
-  - RULE-SET,Groq / Domain,AI
-  - RULE-SET,Grok / Domain,AI
-  - RULE-SET,Meta AI / Domain,AI
-  - RULE-SET,Perplexity / Domain,AI
-  - RULE-SET,AI_Personal / Domain,AI
-  - RULE-SET,Reddit / Domain,SNS 
-  - RULE-SET,WhatsApp / Domain,SNS
-  - RULE-SET,Facebook / Domain,SNS
-  - RULE-SET,TikTok / Domain,SNS
-  - RULE-SET,Apple / Domain,Apple
-  - RULE-SET,Apple-CN / Domain,Apple  
-  - RULE-SET,Apple-Custome / Domain,Apple  
-  - RULE-SET,Microsoft / Domain,Microsoft
-  - RULE-SET,BiliBili / Domain,BiliBili
-  - RULE-SET,Netflix / Domain,StreamMedia
-  - RULE-SET,Netflix / IP,StreamMedia,no-resolve
-  - RULE-SET,Disney / Domain,StreamMedia
-  - RULE-SET,Amazon / Domain,StreamMedia
-  - RULE-SET,Crunchyroll / Domain,StreamMedia
-  - RULE-SET,Popcorn / Domain,StreamMedia 
-  - RULE-SET,HBO / Domain,StreamMedia
-  - RULE-SET,Spotify / Domain,Spotify
-  - RULE-SET,Nvidia / Domain,Nvidia 
-  - RULE-SET,Proxy / Domain,国外
-  - RULE-SET,Globe / Domain,国外  
-  - RULE-SET,Direct / Domain,国内
-  - RULE-SET,China / Domain,国内
-  - RULE-SET,China / IP,国内,no-resolve
-  - RULE-SET,Private / Domain,国内
-  - GEOIP,CN,DIRECT
-  - MATCH,其他
+  #- {name: Block, <<: *default}
+  #- {name: BiliBili, <<: *default}
 
 # ========================
 # 规则引擎（rules）
@@ -456,9 +390,6 @@ rules:
   - RULE-SET,PlayStation / Domain,Game
   - RULE-SET,Nintend / Domain,Game
   - RULE-SET,TEST / Domain,Test
-  - RULE-SET,Block / Domain,Block
-  - RULE-SET,Reject / Domain,Block
-  - RULE-SET,BanAD / Domain,Block
   - RULE-SET,ChatGPT / Domain,AI
   - RULE-SET,Claude / Domain,AI
   - RULE-SET,Copilot / Domain,AI
@@ -492,12 +423,13 @@ rules:
   - RULE-SET,China / Domain,国内
   - RULE-SET,China / IP,国内,no-resolve
   - RULE-SET,Private / Domain,国内
+  - DOMAIN-SUFFIX,cn,DIRECT
   - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
-  - DOMAIN-SUFFIX,cn,DIRECT
-  - RULE-SET,Block / Domain,Block
-  - RULE-SET,Reject / Domain,Block
-  - RULE-SET,BanAD / Domain,Block
+  #- RULE-SET,Reject / Domain,Block
+  - RULE-SET,BanAD / Domain,REJECT
+  - GEOSITE,category-ads-all,REJECT
+  - DOMAIN-KEYWORD,ads,REJECT
   - MATCH,其他
 
 # ========================
@@ -572,8 +504,7 @@ rule-providers:
   Proxy / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Proxy.list"}
   Globe / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"} 
   # Block
-  Block / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Block.list"}
-  Reject / Domain: {<<: *domain, url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"}
+  #Reject / Domain: {<<: *domain, url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"}
   BanAD / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanAD.list"}
   # Others
   TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
@@ -588,10 +519,6 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.yaml"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.yaml"}
-
-
-
-
 
 
 
