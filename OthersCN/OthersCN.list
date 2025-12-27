@@ -16,8 +16,7 @@ DOMAIN,software-static.download.prss.microsoft.com
 # Video playback
 DOMAIN,fs-play.inooy.com  # 飞速
 DOMAIN-KEYWORD,fs-play
-DOMAIN-KEYWORD,fszb81
-DOMAIN-KEYWORD,xzood6veuybwkr.com
-DOMAIN-SUFFIX,n8u4z2s4j8m6d9g7.xyz
-DOMAIN-KEYWORD,gh-proxy
-DOMAIN-KEYWORD,q2n1w3g2y5v0w4l1.cc
+#DOMAIN-KEYWORD,fszb81
+#DOMAIN-KEYWORD,xzood6veuybwkr.com
+#DOMAIN-SUFFIX,n8u4z2s4j8m6d9g7.xyz
+#DOMAIN-KEYWORD,gh-proxy
