@@ -1,7 +1,6 @@
 # ========================
 # Clash-ALL 优化配置
 # ========================
-
 p: &p
   type: http
   # 自动更新订阅时间，单位为秒
@@ -13,11 +12,10 @@ p: &p
     # 节点连通性检测时间，单位为秒
     interval: 300
     # 节点超时延迟，单位为毫秒
-    #timeout: 1000
+    # timeout: 1000
     # 节点自动切换差值，单位为毫秒
     tolerance: 150
   # proxy: 直连 
-
 
 # 机场节点订阅
 # 订阅后面 &flag=clash-provider 就是纯节点模式（未验证）
@@ -67,11 +65,6 @@ proxy-providers:
       additional-prefix: "DH | "
     url: "httpdf359251b03136a283"
 
-
-proxies:
-  - {name: 直连, type: direct}
-  - {name: 拒绝, type: reject}
-
 # ========================
 # 主要端口设置
 # ========================
@@ -80,16 +73,11 @@ socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
-
 allow-lan: true
 mode: rule
 log-level: info
-
 external-controller: 0.0.0.0:9090
-# external-ui: ui
-# external-ui-name: zashboard
-# external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
-secret: "123456"
+ipv6: true
 
 # ========================
 # DNS 设置
@@ -97,17 +85,19 @@ secret: "123456"
 dns:
   enable: true
   listen: 0.0.0.0:7874
-  ipv6: true
-  default-nameserver:
-    - tls://223.5.5.5:853
-    - 223.5.5.5
-    - 119.29.29.29
-    - 114.114.114.114
+  #ipv6: true
+  #default-nameserver:
+    #- 223.5.5.5
+    #- 119.29.29.29
+    #- 114.114.114.114
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
+    #- https://doh.pub/dns-query
+    #- https://dns.alidns.com/dns-query
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
@@ -118,7 +108,7 @@ dns:
     #- +.xn--ngstr-lra8j.com
   # Microsoft
   # DDNS
-    #- +.daengngoenz.cn
+    - +.daengngoenz.cn
   # 机场    
     - +.azumase.ren
     - +.ss.mba    
@@ -126,15 +116,12 @@ dns:
     - +.idsduf.com  
     - +.66jc.top
     - +.dhh.moe
-  # 其他     
-
-ipv6: true
 
 # ========================
 # TUN 模块
 # ========================
 tun:
-  enable: true
+  enable: false
   stack: gvisor
   device: utun
   endpoint-independent-nat: true
@@ -145,12 +132,15 @@ tun:
 
 profile:
   store-selected: true
-  store-fake-ip: true
+  #store-fake-ip: true
  
-
 # ========================
 # 策略组定义
 # ========================
+proxies:
+  - {name: 直连, type: direct}
+  - {name: 拒绝, type: reject}
+
 default: &default
   type: select
   proxies:
@@ -168,9 +158,7 @@ default: &default
     - 拒绝
 
 proxy-groups:
-
   # 业务分流组
-  
   - {name: YouTube, <<: *default}        # 观看BWF比赛
   - {name: Telegram, <<: *default}       # 低倍率
   - {name: Google, <<: *default}         # 谷歌、OneDrive、Github等高速、低流量需求的网站论坛
@@ -351,14 +339,14 @@ proxy-groups:
 
   - {name: SNS, <<: *default}          # Twitter、Facebook、TikTok、Reddit等社交网络，有一定流量需求
   - {name: AI, <<: *default}
-  - {name: StreamMedia, <<: *default}  # 流媒体
+  - {name: Streaming, <<: *default}  # 流媒体
   - {name: Game, <<: *default}         # 游戏平台，包括Steam  
   - {name: Spotify, <<: *default}
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
+  - {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
   #- {name: Block, <<: *default}
-  #- {name: BiliBili, <<: *default}
 
 # ========================
 # 规则引擎（rules）
@@ -427,9 +415,9 @@ rules:
   - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
   #- RULE-SET,Reject / Domain,Block
-  - RULE-SET,BanAD / Domain,REJECT
-  - GEOSITE,category-ads-all,REJECT
-  - DOMAIN-KEYWORD,ads,REJECT
+  #- RULE-SET,BanAD / Domain,REJECT
+  #- GEOSITE,category-ads-all,REJECT
+  #- DOMAIN-KEYWORD,ads,REJECT
   - MATCH,其他
 
 # ========================
@@ -519,11 +507,4 @@ rule-providers:
   BiliBili / Domain: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.yaml"}
 
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.yaml"}
-
-
-
-
-
-
-
 
