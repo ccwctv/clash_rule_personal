@@ -1,9 +1,13 @@
 # NAME: OthersCN
 
+# massgrave.dev
 DOMAIN-SUFFIX,trashbytes.net  
-DOMAIN,software-static.download.prss.microsoft.com
-#DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 
+# Microsoft
+DOMAIN,software-static.download.prss.microsoft.com
+
+#Google
+#DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 
 # Video playback
 DOMAIN,fs-play.inooy.com  # 飞速
