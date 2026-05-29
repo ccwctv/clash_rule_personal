@@ -3,6 +3,7 @@
 # massgrave.dev
 DOMAIN-SUFFIX,trashbytes.net  
 DOMAIN-KEYWORD,dl.zerofs.link
+
 # Microsoft
 DOMAIN,software-static.download.prss.microsoft.com
 
@@ -19,3 +20,5 @@ DOMAIN-KEYWORD,fs-play
 
 # kaspersky
 DOMAIN-KEYWORD,kaspersky.com
+
+DOMAIN-SUFFIX,xiuxitong.com
