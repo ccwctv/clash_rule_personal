@@ -84,20 +84,20 @@ ipv6: true
 # ========================
 dns:
   enable: true
-  listen: 0.0.0.0:7874
+  #listen: 0.0.0.0:53
   #ipv6: true
-  #default-nameserver:
-    #- 223.5.5.5
-    #- 119.29.29.29
-    #- 114.114.114.114
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.20.0.1/16
-  nameserver:
+  # —— default-nameserver（引导DNS，必须是IP）——
+  default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-    - 114.114.114.114
-    #- https://doh.pub/dns-query
-    #- https://dns.alidns.com/dns-query
+    #- 114.114.114.114
+  # —— nameserver（主DNS，国内低延迟加密）——
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.20.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - +.lan
@@ -106,34 +106,7 @@ dns:
   # PlayStore
     #- +.googleapis.cn
     #- +.xn--ngstr-lra8j.com
-  # Microsoft
-  # DDNS
-    - +.daengngoenz.cn
-  # 机场    
-    - +.azumase.ren
-    - +.ss.mba    
-    - +.teacat.cloud
-    - +.idsduf.com  
-    - +.66jc.top
-    - +.dhh.moe
 
-# ========================
-# TUN 模块
-# ========================
-tun:
-  enable: false
-  stack: gvisor
-  device: utun
-  endpoint-independent-nat: true
-  auto-route: false
-  auto-detect-interface: false
-  auto-redirect: false
-  strict-route: false
-
-profile:
-  store-selected: true
-  #store-fake-ip: true
- 
 # ========================
 # 策略组定义
 # ========================
