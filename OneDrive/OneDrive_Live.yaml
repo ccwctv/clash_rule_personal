@@ -4,3 +4,5 @@ payload:
   - DOMAIN-SUFFIX,onedrive.live.com
   - DOMAIN-SUFFIX,photos.live.com
   - DOMAIN-SUFFIX,outlook.live.com
+  - DOMAIN-SUFFIX,sharepoint.com
+  - DOMAIN-SUFFIX,sharepointonline.com
