@@ -338,8 +338,8 @@ rules:
   - RULE-SET,NSFW,Telegram
   - RULE-SET,Google,Google
   - RULE-SET,Google_IP,Google,no-resolve
-  - RULE-SET,OneDrive,Google
-  - RULE-SET,OneDrive_Personal,Google
+  - RULE-SET,OneDrive_Live,Google
+  - RULE-SET,OneDrive,Microsoft
   - RULE-SET,GitHub,Google
   - RULE-SET,Proxy_jichang,Google
   - RULE-SET,Proxy_others,Google
@@ -409,7 +409,7 @@ rule-providers:
   Proxy_jichang: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_jichang.list"}
   NSFW: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/NSFW/NSFW.list"}
   AI_Personal: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/AI/AI_Personal.list"}
-  OneDrive_Personal: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OneDrive/OneDrive_Personal.list"}
+  OneDrive_Live: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OneDrive/OneDrive_Live.list"}
   EmbyServer: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Streaming/EmbyServer.list"}
   Proxy_others: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_others.list"}
   # CN
