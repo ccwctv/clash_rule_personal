@@ -328,7 +328,7 @@ proxy-groups:
 rules:
   # - DOMAIN-SUFFIX,trashbytes.net,国内
   - RULE-SET,OthersCN,国内
-  - RULE-SET,PlayStore,国内
+  #- RULE-SET,PlayStore,国内
   - RULE-SET,SteamCN,国内
   - RULE-SET,GameDownloadCN,国内
   - RULE-SET,EmbyServer,EmbyServer
