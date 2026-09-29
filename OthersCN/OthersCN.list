@@ -7,7 +7,7 @@ DOMAIN-KEYWORD,dl.zerofs.link
 # Microsoft
 DOMAIN,software-static.download.prss.microsoft.com
 
-#Google
+# Google
 #DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 
 # Video playback
@@ -21,4 +21,6 @@ DOMAIN-KEYWORD,fs-play
 # kaspersky
 DOMAIN-KEYWORD,kaspersky.com.cn
 
+# 论坛
 DOMAIN-SUFFIX,xiuxitong.com
+DOMAIN-SUFFIX,centbrowser.net
