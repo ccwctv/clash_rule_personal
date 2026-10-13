@@ -11,9 +11,9 @@ DOMAIN,software-static.download.prss.microsoft.com
 #DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 
 # Video playback
-DOMAIN,fs-play.inooy.com  # 飞速
+DOMAIN,fs-play.inooy.com
 DOMAIN-KEYWORD,fs-play
-DOMAIN-KEYWORD,hxty6 #海星体育
+DOMAIN-KEYWORD,hxty6
 #DOMAIN-KEYWORD,xzood6veuybwkr.com
 #DOMAIN-SUFFIX,n8u4z2s4j8m6d9g7.xyz
 #DOMAIN-KEYWORD,gh-proxy
