@@ -1,3 +1,13 @@
+# Google Play 下载和 YouTube 视频下载流量，都会走 `googlevideo.com` 这个域名
+# PlayStore 走 YouTube 组，其余 Google 再给 Google 组
+# GEOSITE,GOOGLE,Google
 
-#DOMAIN-KEYWORD,googleapis.cn
-DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+DOMAIN-SUFFIX,play.googleapis.com,YouTube
+DOMAIN-SUFFIX,play.google.com,YouTube
+DOMAIN-SUFFIX,play-fe.googleapis.com,YouTube
+DOMAIN-SUFFIX,play-lh.googleusercontent.com,YouTube
+DOMAIN-SUFFIX,android.clients.google.com,YouTube
+DOMAIN-SUFFIX,services.googleapis.cn,YouTube
+DOMAIN-SUFFIX,xn--ngstr-lra8j.com,YouTube
+DOMAIN-SUFFIX,googlevideo.com,YouTube
+
