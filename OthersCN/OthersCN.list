@@ -7,8 +7,8 @@ DOMAIN-KEYWORD,dl.zerofs.link
 # Microsoft
 DOMAIN,software-static.download.prss.microsoft.com
 
-# Google
-#DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+# 软件站点
+DOMAIN,apphot.cc
 
 # Video playback
 DOMAIN,fs-play.inooy.com
