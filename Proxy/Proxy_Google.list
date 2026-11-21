@@ -1,6 +1,0 @@
-#rules:  - RULE-SET,Proxy_Google,Google
-
-#DOMAIN-KEYWORD,XXX
-
-DOMAIN-SUFFIX,translate.google.com
-DOMAIN-SUFFIX,immortalwrt.org
