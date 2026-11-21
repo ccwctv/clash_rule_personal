@@ -1,13 +1,12 @@
-# ========================
-# Clash-ALL 优化配置
-# ========================
+# ==============================================
+# 机场订阅
+# ==============================================
 p: &p
   type: http
   # 自动更新订阅时间，单位为秒
   interval: 10800
   health-check:
     enable: true
-    # url: https://cp.cloudflare.com
     url: https://www.gstatic.com/generate_204
     # 节点连通性检测时间，单位为秒
     interval: 300
@@ -18,70 +17,57 @@ p: &p
   # proxy: 直连 
 
 # 机场节点订阅
-# 订阅后面 &flag=clash-provider 就是纯节点模式（未验证）
 proxy-providers:
 
   00 Yukihasu:
     <<: *p
-    # path: ./proxy_provider/00 Yukihasu.yaml
+    # path: ./proxy_provider/00 Yukihasu.yaml  # 本地缓存路径
     override:
       additional-prefix: "YK | "
-    url: "https://8f9e4c8a8bd4519853e591466"
+    url: "https://fabprotocol=vmess"
+      # additional-prefix: "[provider1]"  # 为节点名添加前缀
+      # additional-suffix: "test"  # 为节点名添加后缀
 
-  01 teacat:
+  01 吹雪云:
     <<: *p
     override:
-      additional-prefix: "TC | "
-    url: "http33cb2a383c3a70062c7513f2f321"
-
+      additional-prefix: "CX | "
+    url: "https://xn--914e6c413"
+    
   02 ShenLong:
     <<: *p
     override:
       additional-prefix: "SL | "
-    url: "httaf33de41d17bb36b1450"
+    url: "https://inter7bb36b1450"
     
-  03 eggtart:
+  03 赔钱机场:
     <<: *p
     override:
-      additional-prefix: "EG | "
-    url: "http40f91b2bfe3a1485c502c"
-    #proxy: 低倍率-故转 
-
-  04 ssLinks:
+      additional-prefix: "PQ | "
+    url: "https://dashc226ae6"
+  
+  04 良心云:
     <<: *p
     override:
-      additional-prefix: "SS | "
-    url: "httef63a3aaf42d97a6728afa1fe68"
+      additional-prefix: "LX | "
+    url: "htt9aa0036a"
 
-  05 newbee:
-    <<: *p
-    override:
-      additional-prefix: "NB | "
-    url: "http76038759230097ff5bd0cca5"
-
-  06 dhh:
-    <<: *p
-    override:
-      additional-prefix: "DH | "
-    url: "httpdf359251b03136a283"
-
-# ========================
-# 主要端口设置
-# ========================
-port: 7890
-socks-port: 7891
-redir-port: 7892
-mixed-port: 7893
-tproxy-port: 7895
+# ==============================================
+# 端口配置
+# ==============================================
 allow-lan: true
 mode: rule
+tcp-concurrent: true
+unified-delay: true
 log-level: info
-external-controller: 0.0.0.0:9090
 ipv6: true
+# 注意：这里写的 secret 必须和 OpenClash 面板里填的一致，否则自己也进不去。
+#external-controller: 0.0.0.0:9090
+#secret: "251147"
 
-# ========================
+# ==============================================
 # DNS 设置
-# ========================
+# ==============================================
 dns:
   enable: true
   #listen: 0.0.0.0:53
@@ -93,9 +79,19 @@ dns:
     #- 114.114.114.114
   # —— nameserver（主DNS，国内低延迟加密）——
   nameserver:
-    - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-    
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    '+.services.googleapis.cn':
+      - https://8.8.8.8/dns-query#RULES
+      - https://dns.google/dns-query#RULES
+    '+.googleapis.cn':
+      - https://8.8.8.8/dns-query#RULES
+      - https://dns.google/dns-query#RULES
+    '+.xn--ngstr-lra8j.com':
+      - https://8.8.8.8/dns-query#RULES
+      - https://dns.google/dns-query#RULES
+      
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   fake-ip-filter-mode: blacklist
@@ -104,8 +100,16 @@ dns:
     - +.local
     - geosite:cn
   # PlayStore
-    #- +.googleapis.cn
-    #- +.xn--ngstr-lra8j.com
+    - +.googleapis.cn
+    - +.services.googleapis.cn
+    - +.xn--ngstr-lra8j.com
+  # Microsoft
+  # DDNS
+    - +.daengngoenz.cn
+  # 机场    
+    - +.azumase.ren
+    - +.ss.mba    
+
 
 # ========================
 # 策略组定义
@@ -114,132 +118,84 @@ proxies:
   - {name: 直连, type: direct}
   - {name: 拒绝, type: reject}
 
+# 注意：select 组不写 default-selected 时，默认值 = 列表第一项。
+# 原配置把「直连」放第一位 —— 换配置 / 清缓存 / 重启内核后，
+# Google、AI、Streaming、Others 会全部回落到直连，
+# 表现就是「别的服务都可用，只有 Google 检测失败、Play 商店一直转圈」。
 default: &default
   type: select
   proxies:
-    - 直连
-    - 低倍率-故转
-    - 香港-故转
-    - 新加坡-故转
-    - 日本-故转
-    - 台湾-故转
+    - 低倍-故转
+    - 港台-故转
+    - 新日-故转
     - 美国-故转
-    - 澳大利亚-故转
     - 所有-手动
-    - 所有-自动
-    - 其他-故转
+    #- 所有-自动
+    - 直连
     - 拒绝
 
 proxy-groups:
+
   # 业务分流组
   - {name: YouTube, <<: *default}        # 观看BWF比赛
-  - {name: Telegram, <<: *default}       # 低倍率
   - {name: Google, <<: *default}         # 谷歌、OneDrive、Github等高速、低流量需求的网站论坛
-  - {name: EmbyServer, <<: *default}         
-  - {name: Microsoft, <<: *default}
-  - {name: Test, <<: *default}         # 测速、测试IP
-  - {name: 国外, <<: *default}
-  - {name: 其他, <<: *default}
-  
+
   # 低倍率组
-  - name: 低倍率-故转
+  - name: 低倍-故转
     type: fallback
     interval: 300
     lazy: false
     proxies:
-      - 低倍率-手动
-      - 低倍率-自动
-  
-  - name: 低倍率-手动
+      - 低倍-手动
+      - 低倍-自动
+  - name: 低倍-手动
     type: select
     include-all: true
     filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新))).*$"
-
-  - name: 低倍率-自动
+  - name: 低倍-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
     filter: "^(?=.*(0\\.1|0\\.25|0\\.5|0\\.3|0\\.|低倍率))(?!(.*(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新))).*$"
   
+  # 港台组
+  - name: 港台-故转
+    type: fallback
+    interval: 300
+    lazy: false
+    proxies:
+      - 港台-手动
+      - 港台-自动
+  - name: 港台-手动
+    type: select
+    include-all: true
+    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan)).*$"
+  - name: 港台-自动
+    type: url-test
+    include-all: true
+    tolerance: 50
+    interval: 300
+    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan)).*$"
 
-  # 香港组
-  - name: 香港-故转
+  # 新日组
+  - name: 新日-故转
     type: fallback
     interval: 300
     lazy: false
     proxies:
-      - 香港-手动
-      - 香港-自动
-  
-  - name: 香港-手动
+      - 新日-手动
+      - 新日-自动
+  - name: 新日-手动
     type: select
     include-all: true
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
-    
-  - name: 香港-自动
+    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
+  - name: 新日-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
-  
-  # 新加坡组
-  - name: 新加坡-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 新加坡-手动
-      - 新加坡-自动
-  - name: 新加坡-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-  - name: 新加坡-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-
-  # 日本组
-  - name: 日本-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 日本-手动
-      - 日本-自动
-  - name: 日本-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
-  - name: 日本-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
-
-  # 台湾组
-  - name: 台湾-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 台湾-手动
-      - 台湾-自动
-  - name: 台湾-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
-  - name: 台湾-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
+    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
 
   # 美国组
   - name: 美国-故转
@@ -252,97 +208,90 @@ proxy-groups:
   - name: 美国-手动
     type: select
     include-all: true
-    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
+    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|澳大利亚|Australia|澳洲|AU|AUS)).*$"
   - name: 美国-自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
-
-# 澳大利亚组
-  - name: 澳大利亚-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 澳大利亚-手动
-      - 澳大利亚-自动
-  - name: 澳大利亚-手动
-    type: select
-    include-all: true
-    filter: "(?=.*(澳大利亚|Australia|澳洲|AU|AUS)).*$"
-  - name: 澳大利亚-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "(?=.*(澳大利亚|Australia|澳洲|AU|AUS)).*$"
+    filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States|澳大利亚|Australia|澳洲|AU|AUS)).*$"
 
   - name: 所有-手动
     type: select
     include-all: true
-    filter: "^((?!(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐)).)*$"
-    
-  - name: 所有-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "^((?!(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐)).)*$"
-
-  # 其他组
-  - name: 其他-故转
-    type: fallback
-    interval: 300
-    lazy: false
-    proxies:
-      - 其他-手动
-      - 其他-自动
-  - name: 其他-手动
-    type: select
-    include-all: true
-    filter: "^((?!(.*(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States))).)*$"
-  - name: 其他-自动
-    type: url-test
-    include-all: true
-    tolerance: 50
-    interval: 300
-    filter: "^((?!(.*(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|过滤|更新|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States))).)*$"
-
+    filter: "^((?!(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|直连)).)*$"
+  #- name: 所有-自动
+    #type: url-test
+    #include-all: true
+    #tolerance: 50
+    #interval: 300
+    #filter: "^((?!(包含|拒绝|剩余|官网|网站|客户端|如果|com|Traffic|流量|套餐|直连)).)*$"
+      
+  - {name: Microsoft, <<: *default}
+  #- {name: PlayStore, <<: *default}
+  - {name: Telegram, <<: *default}       # 低倍率  
+  - {name: EmbyServer, <<: *default}         
+  - {name: Others, <<: *default}
   - {name: SNS, <<: *default}          # Twitter、Facebook、TikTok、Reddit等社交网络，有一定流量需求
   - {name: AI, <<: *default}
   - {name: Streaming, <<: *default}  # 流媒体
   - {name: Game, <<: *default}         # 游戏平台，包括Steam  
-  - {name: Spotify, <<: *default}
-  - {name: Nvidia, <<: *default}
-  - {name: Apple, <<: *default}
-  - {name: BiliBili, <<: *default}
+  #- {name: Test, <<: *default}         # 测速、测试IP
+  #- {name: Spotify, <<: *default}
+  #- {name: Nvidia, <<: *default}
+  #- {name: Apple, <<: *default}
+  #- {name: BiliBili, <<: *default}
   - {name: 国内, <<: *default}
-  #- {name: Block, <<: *default}
 
 # ========================
-# 规则引擎（rules）
-# 空格缩进，尽量不要制表符缩进
+# 空格缩进，尽量不要制表符缩进；虽然有 GLOBAL，但如果规则里没有引用它（例如最后一条规则是 MATCH,DIRECT），那么它就不会起作用
 # ========================
 rules:
-  # - DOMAIN-SUFFIX,trashbytes.net,国内
+
+  # =====局域网 / 私有地址：永远直连，没有这几条时，访问路由器 / NAS 等会匹配 MATCH,Others，一旦 Others 不是直连，内网设备就全挂。=====
+  - RULE-SET,Private,DIRECT
+  - GEOIP,LAN,DIRECT,no-resolve
+
+  # =====国内优先=====
   - RULE-SET,OthersCN,国内
-  #- RULE-SET,PlayStore,国内
   - RULE-SET,SteamCN,国内
   - RULE-SET,GameDownloadCN,国内
+  # geosite:amazon 里含 amazonaws.com / amazon.cn / z.cn，直接丢给 Streaming 会把「亚马逊中国」「中国区 AWS」也送出国，先把国内端点摘出来
+  - DOMAIN-SUFFIX,amazon.cn,DIRECT
+  - DOMAIN-SUFFIX,amazon.com.cn,DIRECT
+  - DOMAIN-SUFFIX,amazonaws.cn,DIRECT
+  - DOMAIN-SUFFIX,amazonaws.com.cn,DIRECT
+  - DOMAIN-SUFFIX,awsstatic.cn,DIRECT
+  - DOMAIN-SUFFIX,z.cn,DIRECT
+  
+  # =====GooglePlay=====
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Google
+  - DOMAIN-SUFFIX,googleapis.com,Google
+  - DOMAIN-SUFFIX,googleapis.cn,Google
+  #- DOMAIN-SUFFIX,play.googleapis.com,YouTube
+  #- DOMAIN-SUFFIX,play.google.com,YouTube
+  #- DOMAIN-SUFFIX,play-lh.googleusercontent.com,YouTube
+  #- DOMAIN-SUFFIX,android.clients.google.com,YouTube
+  
+  # =====代理组-优先级01；AI 组要放在 Google 组之前=====
   - RULE-SET,EmbyServer,EmbyServer
+  - RULE-SET,AI_All,AI
+  #- RULE-SET,AI_Personal,AI
   - RULE-SET,Youtube,YouTube
+  #- RULE-SET,PlayStore,Google  
   - RULE-SET,Telegram,Telegram
   - RULE-SET,Telegram_IP,Telegram,no-resolve
   - RULE-SET,NSFW,Telegram
+  - GEOSITE,GOOGLE,Google
   - RULE-SET,Google,Google
   - RULE-SET,Google_IP,Google,no-resolve
   - RULE-SET,OneDrive_Live,Google
   - RULE-SET,OneDrive,Microsoft
   - RULE-SET,GitHub,Google
   - RULE-SET,Proxy_jichang,Google
-  - RULE-SET,Proxy_others,Google
+  - RULE-SET,Proxy_Google,Google
+
+  # =====代理组-优先级02=====
   - RULE-SET,Steam,Game
   - RULE-SET,Epic,Game
   - RULE-SET,EA,Game
@@ -350,25 +299,14 @@ rules:
   - RULE-SET,UBI,Game
   - RULE-SET,PlayStation,Game
   - RULE-SET,Nintend,Game
-  - RULE-SET,TEST,Test
-  - RULE-SET,ChatGPT,AI
-  - RULE-SET,Claude,AI
-  - RULE-SET,Copilot,AI
-  - RULE-SET,Gemini,AI
-  - RULE-SET,Groq,AI
-  - RULE-SET,Grok,AI
-  - RULE-SET,Meta AI,AI
-  - RULE-SET,Perplexity,AI
-  - RULE-SET,AI_Personal,AI
   - RULE-SET,Reddit,SNS 
   - RULE-SET,WhatsApp,SNS
   - RULE-SET,Facebook,SNS
   - RULE-SET,TikTok,SNS
-  - RULE-SET,Apple,Apple
-  - RULE-SET,Apple-CN,Apple  
-  - RULE-SET,Apple-Custome,Apple  
+  #- RULE-SET,Apple,Apple
+  #- RULE-SET,Apple-CN,Apple
+  #- RULE-SET,Apple-Custome,Apple
   - RULE-SET,Microsoft,Microsoft
-  - RULE-SET,BiliBili,BiliBili
   - RULE-SET,Netflix,Streaming
   - RULE-SET,Netflix_IP,Streaming,no-resolve
   - RULE-SET,Disney,Streaming
@@ -376,23 +314,22 @@ rules:
   - RULE-SET,Crunchyroll,Streaming
   - RULE-SET,Popcorn,Streaming 
   - RULE-SET,HBO,Streaming
-  - RULE-SET,Spotify,Spotify
-  - RULE-SET,Nvidia,Nvidia 
-  - RULE-SET,Proxy,国外
-  - RULE-SET,Globe,国外  
+  #- RULE-SET,Spotify,Spotify
+  #- RULE-SET,Nvidia,Nvidia
+  #- RULE-SET,BiliBili,BiliBili
+  - RULE-SET,Proxy,Others
+  - RULE-SET,Globe,Others  
   - RULE-SET,Direct,国内
   - RULE-SET,China,国内
   - RULE-SET,China_IP,国内,no-resolve
-  - RULE-SET,Private,国内
   - DOMAIN-SUFFIX,cn,DIRECT
   - GEOSITE,cn,DIRECT
-  - GEOIP,CN,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
   #- RULE-SET,Reject,Block
   #- RULE-SET,BanAD,REJECT
   #- GEOSITE,category-ads-all,REJECT
-  #- DOMAIN-KEYWORD,ads,REJECT
-  - MATCH,其他
-
+  - MATCH,Others
+  
 # ========================
 # 规则集提供者
 # ========================
@@ -400,43 +337,40 @@ rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: yaml}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
-
+  # 新增 mrs 二进制格式（内存占用约为 yaml 的 1/5）
+  mrsd: &mrsd {type: http, interval: 86400, behavior: domain, format: mrs}
+  mrsi: &mrsi {type: http, interval: 86400, behavior: ipcidr, format: mrs}
 
 rule-providers:
-
 # Personal Rules
   # Proxy
   Proxy_jichang: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_jichang.list"}
-  NSFW: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/NSFW/NSFW.list"}
-  AI_Personal: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/AI/AI_Personal.list"}
-  OneDrive_Live: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OneDrive/OneDrive_Live.list"}
-  EmbyServer: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Streaming/EmbyServer.list"}
-  Proxy_others: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_others.list"}
+  NSFW: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/NSFW.list"}
+  #AI_Personal: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/AI/AI_Personal.list"}
+  OneDrive_Live: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_Personal/refs/heads/main/Proxy/OneDrive_Live.list"}
+  EmbyServer: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Direct/EmbyServer.list"}
+  Proxy_Google: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/Proxy_Google.list"}
+  PlayStore: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Proxy/PlayStore.list"}
   # CN
-  PlayStore: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Google/PlayStore.list"}
+  GoogleCN: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google-cn.yaml"}
   SteamCN: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list"}
   GameDownloadCN: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.list"}
-  OthersCN: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/OthersCN/OthersCN.list"}
+  OthersCN: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ccwctv/clash_rule_personal/refs/heads/main/Direct/OthersCN.list"}
+  # 内网已经由 GEOIP,LAN,DIRECT,no-resolve 覆盖，这条规则集目前没人引用，先注释掉。真要用它：RULE-SET,LANIP,DIRECT 放在 GEOIP,LAN 前后均可
+  # LANIP: {<<: *ip, url: "https://gh-proxy.com/raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt"}
 # Subscription Rules
   # Google
   Youtube: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.yaml"}  
   Google: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.yaml"}  
   Google_IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.yaml"}
   # AI
-  ChatGPT: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.yaml"}
-  Claude: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list"}
-  Meta AI: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/MetaAi.list"}
-  Perplexity: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.yaml"}
-  Copilot: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Copilot.list"}
-  Gemini: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Gemini.list"}
-  Groq: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/groq.yaml"}
-  Grok: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Grok.list"}
+  AI_All: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-chat-!cn.yaml"}
   # Apple
   Apple-CN: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-cn.yaml"}
   Apple: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.yaml"} 
   Apple-Custome: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Apple.list"}
   # Microsoft
-  OneDrive: {<<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
+  OneDrive: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.list"}
   Microsoft: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.yaml"}
   # Streaming
   Netflix: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.yaml"}
@@ -463,11 +397,11 @@ rule-providers:
   Nintend: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list"}
   Crunchyroll: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Crunchyroll.list"}
   # Proxy
-  Proxy: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Proxy.list"}
+  Proxy: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geosite/proxy.list"}
   Globe: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"} 
   # Block
   #Reject: {<<: *domain, url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"}
-  BanAD: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanAD.list"}
+  #BanAD: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanAD.list"}
   # Others
   TEST: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
   GitHub: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.yaml"}
@@ -480,6 +414,5 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.yaml"}
   BiliBili: {<<: *domain,  url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.yaml"}
 
-#  GateFireWall: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.yaml"}
-
+#  GFW: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.yaml"}
 
